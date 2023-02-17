@@ -5,12 +5,15 @@ echo "Check root..."
 
 #Install tools
 echo "Install tools"
-apk add git gcc g++ make bison ncurses cmake opensll --no-cache
+apk update
+apk add git gcc g++ make bison ncurses cmake openssl --no-cache
 
 #Install dependencies
 echo "Install dependencies"
-apk add libaio-dev ncurese-dev zlib-dev libevent-dev ncurses-dev libevent zstd-libs libcurl curl-dev zstd zstd-dev --no-cache
-apk add gnutls-dev bzip2-dev lz4-dev lzo-dev snappy-dev xz-dev libxml2-dev boost-dev flex lz4 linux-pam-dev --no-cache
+apk update
+apk add libaio-dev zlib-dev libevent-dev ncurses-dev libevent zstd-libs libcurl curl-dev zstd zstd-dev
+apk add gnutls-dev bzip2-dev lz4-dev lzo-dev snappy-dev xz-dev libxml2-dev boost-dev flex lz4 linux-pam-dev
+apk add ncurses-dev 
 
 #Clone mariadb source
 echo "Clone mariadb source"
