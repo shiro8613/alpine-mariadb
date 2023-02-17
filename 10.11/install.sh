@@ -31,18 +31,28 @@ make install
 
 #Get add files
 echo "Get add files"
+curl -o mariadb-init-d --url https://raw.githubusercontent.com/shiro8613/alpine-mariadb/master/10.11/mariadb-initd
+curl -o my.cnf-df --url 
 
 #Add user
 echo "Add user"
+adduser -D -H mariadb
+
+#Add directory
+echo "Add directory"
+mkdir /run/mysqld
 
 #Ownership change
 echo "Ownership change"
-
-#Init database
-echo "Init database"
+chown -R mariadb:mariadb /usr/local/mysql
+chown -R mariadb:mariadb /run/mysqld
 
 #Regist service
 echo "Regist service"
+
+
+#Init database
+echo "Init database"
 
 #Run mariadbd
 echo "Run mariadbd"
