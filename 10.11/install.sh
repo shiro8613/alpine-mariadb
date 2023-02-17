@@ -32,7 +32,7 @@ make install
 #Get add files
 echo "Get add files"
 curl -o mariadb-init-d --url https://raw.githubusercontent.com/shiro8613/alpine-mariadb/master/10.11/mariadb-initd
-curl -o my.cnf-df --url 
+curl -o my.cnf-df --url https://raw.githubusercontent.com/shiro8613/alpine-mariadb/master/10.11/my.cnf
 
 #Add user
 echo "Add user"
@@ -42,18 +42,26 @@ adduser -D -H mariadb
 echo "Add directory"
 mkdir /run/mysqld
 
+#Move cnf file
+echo "Move file"
+rm -f /etc/my.cnf
+mv -f my.cnf-df /etc/my.cnf
+
 #Ownership change
 echo "Ownership change"
 chown -R mariadb:mariadb /usr/local/mysql
+chown mariadb:mariadb /etc/my.cnf
 chown -R mariadb:mariadb /run/mysqld
 
 #Regist service
 echo "Regist service"
-
+cp mariadb-init-d /etc/init.d/mariadb
 
 #Init database
 echo "Init database"
+service mariadb setup
 
 #Run mariadbd
 echo "Run mariadbd"
+service mariadb start
 
