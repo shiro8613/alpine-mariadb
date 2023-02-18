@@ -26,7 +26,7 @@ start_post() {
 
 setup() {
         ebegin "Creating a new MySQL database"
-        /usr/local/mysql/scripts/mariadb-install-db --user=mysql --ldata=/usr/local/mysql/data
+        /usr/local/mysql/scripts/mariadb-install-db --user=mariadb --ldata=/usr/local/mysql/data
         eend $?
 }
 

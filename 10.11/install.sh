@@ -29,11 +29,6 @@ cmake . -DBUILD_CONFIG=mysql_release
 echo "Run make install"
 make install
 
-#Get add files
-echo "Get add files"
-curl -o mariadb-init-d --url https://raw.githubusercontent.com/shiro8613/alpine-mariadb/master/10.11/mariadb-initd
-curl -o my.cnf-df --url https://raw.githubusercontent.com/shiro8613/alpine-mariadb/master/10.11/my.cnf
-
 #Add user
 echo "Add user"
 adduser -D -H mariadb
@@ -44,8 +39,10 @@ mkdir /run/mysqld
 
 #Move cnf file
 echo "Move file"
+cd ..
 rm -f /etc/my.cnf
-mv -f my.cnf-df /etc/my.cnf
+rm -f /etc/my.cnf.d/*
+mv -f my.cnf /etc/my.cnf
 
 #Ownership change
 echo "Ownership change"
@@ -55,7 +52,8 @@ chown -R mariadb:mariadb /run/mysqld
 
 #Regist service
 echo "Regist service"
-cp mariadb-init-d /etc/init.d/mariadb
+cp mariadb-initd /etc/init.d/mariadb
+chmod +x /etc/init.d/mariadb
 
 #Init database
 echo "Init database"
