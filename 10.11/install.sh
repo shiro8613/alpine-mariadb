@@ -36,6 +36,7 @@ adduser -D -H mariadb
 #Add directory
 echo "Add directory"
 mkdir -p /run/mysqld
+mkdir -p /etc/my.cnf.d
 
 #Move cnf file
 echo "Move file"
@@ -49,6 +50,13 @@ echo "Regist service"
 cp mariadb-initd /etc/init.d/mariadb
 chmod +x /etc/init.d/mariadb
 
+#Ownership change
+echo "Ownership change"
+chown -R mariadb:mariadb /usr/local/mysql
+chown mariadb:mariadb /etc/my.cnf
+chown -R mariadb:mariadb /run/mysqld
+chown -R mariadb:mariadb /etc/my.cnf.d
+
 #Init database
 echo "Init database"
 service mariadb setup
@@ -58,6 +66,8 @@ echo "Ownership change"
 chown -R mariadb:mariadb /usr/local/mysql
 chown mariadb:mariadb /etc/my.cnf
 chown -R mariadb:mariadb /run/mysqld
+chown -R mariadb:mariadb /etc/my.cnf.d
+
 
 #Run mariadbd
 echo "Run mariadbd"
